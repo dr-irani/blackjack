@@ -2,7 +2,7 @@ DECK_SIZE = 52
 INITIAL_DEAL_SIZE = 3
 FIRST_CARD = 1
 SUM = 0
-MAX_SUM = 21
+MAX_HAND_SUM = 21
 NUM_SUITS = 4
 NUM_TYPES = 13 #replace with actual name for this
 TWO_NUM = 2
@@ -43,6 +43,7 @@ HEARTS = "Hearts"
 # Strings
 YES = 'y'
 NO = 'n'
+BUST = 'bust!'
 HOW_MANY_PLAYERS_MESSAGE = "How many players would like to play? Please input \
 a number between 1 and 4.\n"
 ONE_PLAYER_LOOK_MESSAGE = "Player %d, it is your turn to be a dealt a hand. \

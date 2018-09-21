@@ -24,6 +24,8 @@ class Hand:
 
     def _calculate_sum_of_cards(self):
         [self.sum += val for val in self.hand]
+        if self.sum > cn.MAX_HAND_SUM:
+            self.sum = cn.BUST
 
 
     def hit(self):
