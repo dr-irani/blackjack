@@ -12,29 +12,51 @@ def shuffle_deck():
     np.random.shuffle(deck)
     return deck
 
-def deal_hand(int start):
-    hand = [np.list.insert(shuffle_deck[start + card]) for card in range(cn.INITIAL_DEAL_SIZE)]
-    return np.list
+def reshuffle(cards_used, num_players):
+    if (cn.DECK_SIZE - cards_used) < (cn.INITIAL_DEAL_SIZE * num_players):
+        return True
+    return False
 
-def play_game(int start):
+def deal_hand(start, deck):
+    hand = np.list(cn.INITIAL_DEAL_SIZE)
+    [hand[card + 1] = deck[start + card] for card in range(cn.INITIAL_DEAL_SIZE)]
+    hand[0] = sum(hand[1:])
+    return hand
+
+def hit_or_pass(start, deck, hands):
+    if 
+
+
+def play_game(num_players, start, deck, hands):
     for player in num_players:
-        hand = deal_hand(cards_drawn_counter)
+        if num_players > 0:
+            printf(ONE_PLAYER_LOOK_MESSAGE, player)
+            print(CONTINUE_MESSAGE)
+        hand = deal_hand(cards_drawn_counter, deck)
         cards_drawn_counter += cn.INITIAL_DEAL_SIZE
+        print("Here is your hand:")
+    for player in num_players:
+    hit_or_pass(start, deck, hands)
     print(cn.ANOTHER_ROUND_MESSAGE)
     choice = True
     if choice:
-        play_game(cards_drawn_counter)
+        if reshuffle():
+            deck = shuffle_deck(cards_drawn_counter, num_players)
+        play_game(num_players, cards_drawn_counter, deck, hands)
+    return #index position for max value in number of wins
 
 def setup_game(num_players):
     int cards_drawn_counter = 0
     hands = np.array(num_players)
-    play_game(cards_drawn_counter)
+    deck = shuffle_deck()
+    play_game(num_players, cards_drawn_counter, deck, hands)
 
 
 def main():
     print(cn.HOW_MANY_PLAYERS_MESSAGE)
     int num_players = 1
-    play_game(num_players)
+    winner = play_game(num_players)
+    printf(cn.WINNER_MESSAGE, winner)
     print(cn.THANKS_FOR_PLAYING_MESSAGE)
     
 
