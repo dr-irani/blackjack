@@ -23,18 +23,27 @@ def deal_hand(start, deck):
     hand[0] = sum(hand[1:])
     return hand
 
+def initial_deal(num_players, start, deck, hands):
+    for player in num_players:
+        if num_players > 0:
+            printf(ONE_PLAYER_LOOK_MESSAGE, player)
+            print(CONTINUE_MESSAGE)
+            # when Y pressed, continue
+        hand = deal_hand(cards_drawn_counter, deck)
+        cards_drawn_counter += cn.INITIAL_DEAL_SIZE
+        printf(DISPLAY_HAND_MESSAGE, hand[cn.FIRST_CARD], hand[cn.SECOND_CARD],
+            hand[cn.THIRD_CARD], hand[cn.SUM])
+        if num_players > 0:
+            print(CONTINUE_MESSAGE)
+            # command clear
+    return hands
+
 def hit_or_pass(start, deck, hands):
     if 
 
 
 def play_game(num_players, start, deck, hands):
-    for player in num_players:
-        if num_players > 0:
-            printf(ONE_PLAYER_LOOK_MESSAGE, player)
-            print(CONTINUE_MESSAGE)
-        hand = deal_hand(cards_drawn_counter, deck)
-        cards_drawn_counter += cn.INITIAL_DEAL_SIZE
-        print("Here is your hand:")
+    hands = initial_deal(num_players, start, deck, hands)
     for player in num_players:
     hit_or_pass(start, deck, hands)
     print(cn.ANOTHER_ROUND_MESSAGE)
