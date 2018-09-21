@@ -6,54 +6,106 @@ Instructions to use:
 
 import numpy as np
 import constants as cn
+from hand import Hand
 
 
-class BlackJack():
+class BlackJackBase(object):
 
-    def __init__(self, num_players)
-        self.num_players
-        self.winner = None
-        self.num_wins = 0
+    def __init__(self, num_players, deal_size=INITIAL_DEAL_SIZE)
+        self.num_players = num_players
+        self.deal_size = deal_size
+        self.start = 0
+
 
     def _shuffle_deck(self):
         deck = np.arange(cn.DECK_SIZE)
         np.random.shuffle(deck)
         return deck
 
+
     def _reshuffle(self, cards_used):
-        if (cn.DECK_SIZE - cards_used) < (cn.INITIAL_DEAL_SIZE * self.num_players):
+        if (cn.DECK_SIZE - cards_used) < (self.deal_size * self.num_players):
             return True
         return False
 
-    # def deal_hand(self, start, deck):
-    #     hand = np.list(cn.INITIAL_DEAL_SIZE)
-    #     [hand[card + 1] = deck[start + card] for card in range(cn.INITIAL_DEAL_SIZE)]
-    #     hand[0] = sum(hand[1:])
-    #     return hand
 
-    def initial_deal(num_players, start, deck, hands):
-        for player in num_players:
-            if num_players > 0:
-                printf(ONE_PLAYER_LOOK_MESSAGE, player)
-                print(CONTINUE_MESSAGE)
-                # when Y pressed, continue
-            hand = deal_hand(cards_drawn_counter, deck)
-            cards_drawn_counter += cn.INITIAL_DEAL_SIZE
-            printf(DISPLAY_HAND_MESSAGE, hand[cn.FIRST_CARD], hand[cn.SECOND_CARD],
-                hand[cn.THIRD_CARD], hand[cn.SUM])
-            if num_players > 0:
-                print(CONTINUE_MESSAGE)
-                # command clear
+    def _initial_deal(self, deck):
+        h = Hand(self.deal_size, deck, self.start)
+        self.start = h.start
+        return h.hand, h
+
+
+    def _next_moves(self, deck, hand, hand_object):
+        """
+        TODO: turn into do while loop
+        """
+        h = hand_object
+        print(hand, NEXT_MOVE_MESSAGE)
+        # scan for input
+        move = cn.HIT
+        while move == cn.HIT:
+            h.hit()
+            if h.hand_sum == cn.BUST:
+                break;
+            print(hand, NEXT_MOVE_MESSAGE)
+            # scan for input
+        return h.hand, h.hand_sum, h
+
+
+    def play_game(self, deck):
+        """
+        TODO: Should this live here or in the driver?
+        """
+        hand, hand_sum, h = _next_moves(self.start, deck, hand, h)
+        print(cn.ANOTHER_ROUND_MESSAGE)
+        # scan for input
+        while choice:
+            if self._reshuffle(self.start):
+                deck = self._shuffle_deck()
+            play_game(deck)
+
+
+
+    def _setup_game(self):
+        deck = _shuffle_deck()
+        self.play_game(cn.start, deck)
+
+
+
+class BlackJackSolo(BlackJackBase):
+
+    def __init__(self, num_players, deal_size=INITIAL_DEAL_SIZE):
+        pass
+
+    def play_game_solo(self, deck):
+        hand, h = self._initial_deal(deck)
+        self.play_game(deck)
+
+
+
+class BlackJackGroup(BlackJackBase):
+
+    def __init__(self, num_players, deal_size=INITIAL_DEAL_SIZE)
+        self.winner = None
+        self.num_wins = 0
+
+
+    def _initial_deal_group(self, start, deck, hands):
+        for player in self.num_players:
+            printf(ONE_PLAYER_LOOK_MESSAGE, player)
+            print(CONTINUE_MESSAGE)
+            # when Y pressed, continue
+
+            self._initial_deal(start, deck, hands)
+            print(CONTINUE_MESSAGE)
+            # command clear
         return hands
 
-    def hit_or_pass(start, deck, hands):
-        if 
 
-
-    def play_game(num_players, start, deck, hands):
-        hands = initial_deal(num_players, start, deck, hands)
-        for player in num_players:
-        hit_or_pass(start, deck, hands)
+    def play_game_group(self, deck, hands):
+        for player in self.num_players:
+            hands[player], hs[player] = self._initial_deal_group(deck, hands[player])
+        hit_or_pass(self.start, deck, hands)
         print(cn.ANOTHER_ROUND_MESSAGE)
         choice = True
         if choice:
@@ -62,9 +114,8 @@ class BlackJack():
             play_game(num_players, cards_drawn_counter, deck, hands)
         return #index position for max value in number of wins
 
-    def setup_game(num_players):
-        int cards_drawn_counter = 0
-        hands = np.array(num_players)
-        deck = shuffle_deck()
-        play_game(num_players, cards_drawn_counter, deck, hands)
 
+    def _setup_game_group(self):
+        self._setup_game()
+        hands = np.array(self.num_players)
+        self.play_game(deck, hands)
