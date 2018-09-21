@@ -49,7 +49,7 @@ ONE_PLAYER_LOOK_MESSAGE = "Player %d, it is your turn to be a dealt a hand. \
 All other players please look away from the screen at this time.\n"
 CONTINUE_MESSAGE = "Ready to continue? Press Y when ready.\n"
 DISPLAY_HAND_MESSAGE = "Here is your hand:\n"
-DISPLAY_HAND_SUM = "The sum of your cards is: %d\n."
+DISPLAY_HAND_SUM = "The sum of your cards is "
 ANOTHER_ROUND_MESSAGE = "Would you like to play another round? Y/N\n"
 WINNER_MESSAGE = "The winner is player %d!\n"
 THANKS_FOR_PLAYING_MESSAGE = "Thanks for playing Black Jack, I hope you \

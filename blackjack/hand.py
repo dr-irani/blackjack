@@ -6,28 +6,29 @@ import numpy as np
 import constants as cn
 from num_to_card_converter import convert
 
+
 class Hand:
     def __init__(self, deal_size, deck, start):
         self.deal_size = deal_size
         self.deck = deck
         self.start = start
         self.hand = self.deal()
-        self.sum = None
+        self.sum = 0
+
 
     def __str__(self):
-        """
-        TODO: convert this into string for method to return
-        """
-        hand_array = np.array(len(self.hand))
-        [hand_array[pos] = val for val in self.hand]
-        print(DISPLAY_HAND_MESSAGE)
-        for val in hand_array[cn.FIRST_CARD:]:
-            print(convert(val) + '\n')
-        printf(DISPLAY_HAND_SUM, hand_array[cn.SUM])
+        return DISPLAY_HAND_MESSAGE +
+            [print(convert(val) + '\n') for val in self.hand] +
+            DISPLAY_HAND_SUM + self.sum
+
+
+    def _calculate_sum_of_cards(self):
+        [self.sum += val for val in self.hand]
+
 
     def hit(self):
         hand.add(self.deck[self.start])
-        hand[sum]
+        self._calculate_sum_of_cards()
 
 
     def deal(self):
@@ -37,7 +38,7 @@ class Hand:
         hand = np.list(cn.INITIAL_DEAL_SIZE)
         [hand[card + 1] = self.deck[self.start + card] for card in 
             range(cn.INITIAL_DEAL_SIZE)]
-        hand[0] = sum(hand[1:])
+        self._calculate_sum_of_cards()
         self.start += cn.INITIAL_DEAL_SIZE
         return hand
 
