@@ -105,6 +105,9 @@ class BlackJackGroup(BlackJackBase):
     def play_game_group(self, deck, hands):
         for player in self.num_players:
             hands[player], hs[player] = self._initial_deal_group(deck, hands[player])
+            self.play_game(deck)
+
+        
         hit_or_pass(self.start, deck, hands)
         print(cn.ANOTHER_ROUND_MESSAGE)
         choice = True
