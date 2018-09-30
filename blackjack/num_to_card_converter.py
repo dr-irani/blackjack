@@ -25,3 +25,7 @@ def convert(card_number):
             cn.HEARTS_NUM: cn.HEARTS}[card_number % cn.NUM_SUITS]
 
     return "{0} of {1}".format(card_type, suit)
+
+def value(card_number):
+    return card_number % cn.NUM_TYPES
+

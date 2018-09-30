@@ -7,20 +7,21 @@ Instructions to use:
 import numpy as np
 import constants as cn
 from hand import Hand
+from num_to_card_converter import convert
 
 
 class BlackJackBase(object):
 
-    def __init__(self, num_players, deal_size=INITIAL_DEAL_SIZE)
+    def __init__(self, num_players, deal_size=cn.INITIAL_DEAL_SIZE):
         self.num_players = num_players
         self.deal_size = deal_size
-        self.start = 0
+
 
 
     def _shuffle_deck(self):
         deck = np.arange(cn.DECK_SIZE)
         np.random.shuffle(deck)
-        return deck
+        return deck.tolist()
 
 
     def _reshuffle(self, cards_used):
@@ -30,25 +31,28 @@ class BlackJackBase(object):
 
 
     def _initial_deal(self, deck):
-        h = Hand(self.deal_size, deck, self.start)
-        self.start = h.start
+        h = Hand(self.deal_size, deck)
         return h.hand, h
 
+    def _display_hand(self, hand):
+        print(cn.DISPLAY_HAND_MESSAGE)
+        [print(convert(card)) for card in hand]
 
     def _next_moves(self, deck, hand, hand_object):
         """
         TODO: turn into do while loop
         """
         h = hand_object
-        print(hand, NEXT_MOVE_MESSAGE)
-        # scan for input
-        move = cn.HIT
-        while move == cn.HIT:
+        self._display_hand(hand)
+        move = input(cn.NEXT_MOVE_MESSAGE)
+        while move.lower() == cn.HIT:
             h.hit()
+            self._display_hand(hand)
             if h.hand_sum == cn.BUST:
+                print(cn.BUST)
                 break;
-            print(hand, NEXT_MOVE_MESSAGE)
-            # scan for input
+            self._display_hand(hand)
+            move = input(cn.NEXT_MOVE_MESSAGE)
         return h.hand, h.hand_sum, h
 
 
@@ -56,26 +60,26 @@ class BlackJackBase(object):
         """
         TODO: Should this live here or in the driver?
         """
-        hand, hand_sum, h = _next_moves(self.start, deck, hand, h)
-        print(cn.ANOTHER_ROUND_MESSAGE)
-        # scan for input
-        while choice:
-            if self._reshuffle(self.start):
+        hand, h = self._initial_deal(deck)
+        hand, hand_sum, h = self._next_moves(deck, hand, h)
+        choice = input(cn.ANOTHER_ROUND_MESSAGE)
+        while choice.lower() == cn.YES:
+            if self._reshuffle(len(deck)):
                 deck = self._shuffle_deck()
-            play_game(deck)
+            self.play_game(deck)
 
 
 
     def _setup_game(self):
-        deck = _shuffle_deck()
-        self.play_game(cn.start, deck)
+        deck = self._shuffle_deck()
+        self.play_game(deck)
 
 
 
 class BlackJackSolo(BlackJackBase):
 
-    def __init__(self, num_players, deal_size=INITIAL_DEAL_SIZE):
-        pass
+    def __init__(self, deal_size=cn.INITIAL_DEAL_SIZE):
+        super().__init__(num_players=1, deal_size=deal_size)
 
     def play_game_solo(self, deck):
         hand, h = self._initial_deal(deck)
@@ -85,7 +89,8 @@ class BlackJackSolo(BlackJackBase):
 
 class BlackJackGroup(BlackJackBase):
 
-    def __init__(self, num_players, deal_size=INITIAL_DEAL_SIZE)
+    def __init__(self, num_players, deal_size=cn.INITIAL_DEAL_SIZE):
+        super().__init__(num_players, deal_size=deal_size)
         self.winner = None
         self.num_wins = 0
 
@@ -121,4 +126,4 @@ class BlackJackGroup(BlackJackBase):
     def _setup_game_group(self):
         self._setup_game()
         hands = np.array(self.num_players)
-        self.play_game(deck, hands)
+        self.play_game_group(deck, hands)

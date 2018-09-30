@@ -39,13 +39,13 @@ JACK = "Jack"
 QUEEN = "Queen"
 KING = "King"
 ACE = "Ace"
-CLUBS_ = "Clubs"
+CLUBS = "Clubs"
 SPADES = "Spades"
 DIAMONDS = "Diamonds"
 HEARTS = "Hearts"
 YES = 'y'
 NO = 'n'
-BUST = 'bust!'
+BUST = 'Bust!'
 HIT = 'h'
 PASS = 'p'
 HOW_MANY_PLAYERS_MESSAGE = "How many players would like to play? Please input \
@@ -55,8 +55,10 @@ All other players please look away from the screen at this time.\n"
 CONTINUE_MESSAGE = "Ready to continue? Press Y when ready.\n"
 DISPLAY_HAND_MESSAGE = "Here is your hand:\n"
 DISPLAY_HAND_SUM = "The sum of your cards is "
-NEXT_MOVE_MESSAGE "What's your move? Hit or pass? H/P\n"
+NEXT_MOVE_MESSAGE = "What's your move? Hit or pass? H/P\n"
 ANOTHER_ROUND_MESSAGE = "Would you like to play another round? Y/N\n"
 WINNER_MESSAGE = "The winner is player %d!\n"
 THANKS_FOR_PLAYING_MESSAGE = "Thanks for playing Black Jack, I hope you \
 enjoyed it!\n"
+TOO_MANY_PLAYERS_ERROR = "This game is only supported for 1-4 players. \
+Please input a valid number."
