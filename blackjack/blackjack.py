@@ -19,7 +19,8 @@ def reshuffle(cards_used, num_players):
 
 def deal_hand(start, deck):
     hand = np.list(cn.INITIAL_DEAL_SIZE)
-    [hand[card + 1] = deck[start + card] for card in range(cn.INITIAL_DEAL_SIZE)]
+    for card in range(cn.INITIAL_DEAL_SIZE):
+        hand[card + 1] = deck[start + card]
     hand[0] = sum(hand[1:])
     return hand
 
@@ -38,8 +39,8 @@ def initial_deal(num_players, start, deck, hands):
             # command clear
     return hands
 
-def hit_or_pass(start, deck, hands):
-    if 
+# def hit_or_pass(start, deck, hands):
+#     if 
 
 
 def play_game(num_players, start, deck, hands):
