@@ -38,20 +38,36 @@ class BlackJackBase(object):
         print(cn.DISPLAY_HAND_MESSAGE)
         [print(convert(card)) for card in hand]
 
+    def _check_choice(self, choice):
+        choice = choice.lower()
+        if choice == cn.NO or choice == cn.NO_FULL:
+            return cn.NO
+        elif choice == cn.YES or choice == cn.YES_FULL:
+            return cn.YES
+        else:
+            return self._check_choice(input(cn.INVALID_CHOICE))
+
+    def _check_move(self, move):
+        move = move.lower()
+        if move == cn.HIT or move == cn.HIT_FULL:
+            return cn.HIT
+        elif move == cn.PASS or move == cn.PASS_FULL:
+            return cn.PASS
+        else:
+            return self._check_move(input(cn.INVALID_MOVE))
+
+
     def _next_moves(self, deck, hand, hand_object):
         """
         TODO: turn into do while loop
         """
         h = hand_object
-        self._display_hand(hand)
+        print(cn.DISPLAY_FIRST_CARD, convert(hand[0]))
         move = input(cn.NEXT_MOVE_MESSAGE)
-        while move.lower() == cn.HIT:
+        move = self._check_move(move)
+        while move == cn.HIT:
             h.hit()
-            self._display_hand(hand)
-            if h.hand_sum == cn.BUST:
-                print(cn.BUST)
-                break;
-            self._display_hand(hand)
+            print(convert(hand[-1]))
             move = input(cn.NEXT_MOVE_MESSAGE)
         return h.hand, h.hand_sum, h
 
@@ -62,12 +78,22 @@ class BlackJackBase(object):
         """
         hand, h = self._initial_deal(deck)
         hand, hand_sum, h = self._next_moves(deck, hand, h)
+        if h.hand_sum == cn.BLACKJACK_NUM:
+            print(cn.BLACKJACK)
+            self._display_hand(hand)
+        elif h.hand_sum == cn.BUST:
+            print(cn.BUST)
+            self._display_hand(hand)
+        else:
+            self._display_hand(hand)
+            print(cn.DISPLAY_HAND_SUM, h.hand_sum, "\n")
+
         choice = input(cn.ANOTHER_ROUND_MESSAGE)
-        while choice.lower() == cn.YES:
+        choice = self._check_choice(choice)
+        if choice == cn.YES:
             if self._reshuffle(len(deck)):
                 deck = self._shuffle_deck()
             self.play_game(deck)
-
 
 
     def _setup_game(self):

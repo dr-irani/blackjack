@@ -27,5 +27,8 @@ def convert(card_number):
     return "{0} of {1}".format(card_type, suit)
 
 def value(card_number):
-    return card_number % cn.NUM_TYPES
+    val = card_number % cn.NUM_TYPES
+    if val > cn.FACE_CARD_VALUE or val == cn.KING_NUM:
+        return cn.FACE_CARD_VALUE
+    return val
 

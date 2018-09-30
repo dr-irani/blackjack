@@ -28,8 +28,8 @@ class Hand(object):
         self.hand_sum = 0
         for val in self.hand:
             self.hand_sum += value(val)
-        print(self.hand_sum)
-        if self.hand_sum > cn.MAX_HAND_SUM:
+        # print(self.hand_sum)
+        if self.hand_sum > cn.BLACKJACK_NUM:
             self.hand_sum = cn.BUST
 
 
