@@ -11,7 +11,7 @@ def main():
     num_players = 1
     if num_players == 1:
         game = BlackJackSolo()
-        game._setup_game()
+        game.play_game()
     elif num_players > 1 and num_players <= 4:
         game = BlackJackGroup(num_players)
         winner = game._setup_game_group()

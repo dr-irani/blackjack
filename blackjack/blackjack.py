@@ -17,17 +17,10 @@ class BlackJackBase(object):
         self.deal_size = deal_size
 
 
-
-    def _shuffle_deck(self):
+    def shuffle_deck(self):
         deck = np.arange(cn.DECK_SIZE)
         np.random.shuffle(deck)
         return deck.tolist()
-
-
-    def _reshuffle(self, cards_used):
-        if (cn.DECK_SIZE - cards_used) < (self.deal_size * self.num_players):
-            return True
-        return False
 
 
     def _initial_deal(self, deck):
@@ -44,8 +37,7 @@ class BlackJackBase(object):
             return cn.NO
         elif choice == cn.YES or choice == cn.YES_FULL:
             return cn.YES
-        else:
-            return self._check_choice(input(cn.INVALID_CHOICE))
+        return self._check_choice(input(cn.INVALID_CHOICE))
 
     def _check_move(self, move):
         move = move.lower()
@@ -53,8 +45,7 @@ class BlackJackBase(object):
             return cn.HIT
         elif move == cn.PASS or move == cn.PASS_FULL:
             return cn.PASS
-        else:
-            return self._check_move(input(cn.INVALID_MOVE))
+        return self._check_move(input(cn.INVALID_MOVE))
 
 
     def _next_moves(self, deck, hand, hand_object):
@@ -69,15 +60,15 @@ class BlackJackBase(object):
             h.hit()
             print(convert(hand[-1]))
             move = input(cn.NEXT_MOVE_MESSAGE)
-        return h.hand, h.hand_sum, h
+        return h.hand, h
 
 
-    def play_game(self, deck):
+    def _game(self, deck):
         """
         TODO: Should this live here or in the driver?
         """
         hand, h = self._initial_deal(deck)
-        hand, hand_sum, h = self._next_moves(deck, hand, h)
+        hand, h = self._next_moves(deck, hand, h)
         if h.hand_sum == cn.BLACKJACK_NUM:
             print(cn.BLACKJACK)
             self._display_hand(hand)
@@ -91,14 +82,13 @@ class BlackJackBase(object):
         choice = input(cn.ANOTHER_ROUND_MESSAGE)
         choice = self._check_choice(choice)
         if choice == cn.YES:
-            if self._reshuffle(len(deck)):
-                deck = self._shuffle_deck()
-            self.play_game(deck)
+            deck = self.shuffle_deck()
+            self._game(deck)
 
 
-    def _setup_game(self):
-        deck = self._shuffle_deck()
-        self.play_game(deck)
+    def play_game(self):
+        deck = self.shuffle_deck()
+        self._game(deck)
 
 
 
@@ -138,7 +128,7 @@ class BlackJackGroup(BlackJackBase):
             hands[player], hs[player] = self._initial_deal_group(deck, hands[player])
             self.play_game(deck)
 
-        
+
         hit_or_pass(self.start, deck, hands)
         print(cn.ANOTHER_ROUND_MESSAGE)
         choice = True

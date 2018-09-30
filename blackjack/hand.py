@@ -17,7 +17,7 @@ class Hand(object):
 
     def __str__(self):
         return cn.DISPLAY_HAND_MESSAGE + \
-            [convert(val) + '\n' for val in self.hand] + \
+            [convert(card) + '\n' for card in self.hand] + \
             cn.DISPLAY_HAND_SUM + self.hand_sum + '\n'
 
 

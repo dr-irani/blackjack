@@ -62,10 +62,10 @@ CONTINUE_MESSAGE = "Ready to continue? Press Y when ready.\n"
 DISPLAY_HAND_MESSAGE = "\nHere is your hand:\n"
 DISPLAY_HAND_SUM = "\nThe sum of your cards is"
 NEXT_MOVE_MESSAGE = "What's your move? Hit or pass? H/P\n"
-ANOTHER_ROUND_MESSAGE = "Would you like to play another round? Y/N\n"
+ANOTHER_ROUND_MESSAGE = "Would you like to play another round? Yes or no? Y/N\n"
 WINNER_MESSAGE = "The winner is player %d!\n"
-THANKS_FOR_PLAYING_MESSAGE = "Thanks for playing Black Jack, I hope you \
-enjoyed it!\n"
+THANKS_FOR_PLAYING_MESSAGE = "\nThanks for playing my Black Jack game, I hope you \
+enjoyed it!"
 TOO_MANY_PLAYERS_ERROR = "This game is only supported for 1-4 players. \
 Please input a valid number."
 DISPLAY_FIRST_CARD = "Your first card is:\n"
