@@ -1,0 +1,71 @@
+Darius Irani
+dirani2@jhu.edu
+
+Instructions for running game:
+$ python play_blackjack.py
+
+Instructions for running tests:
+$ python -m unittest test_blackjack.py
+$ python -m unittest test_hand.py
+
+
+Contents of zip file:
+play_blackjack.py - driver function which instatiates instance of blackjack game.
+blackjack.py - class defining blackjack game.
+hand.py - class containing all relevant methods involving a blackjack hand.
+num_to_card_converter.py - contains helper functions to get value of blackjack
+    card and get string representation of card.
+constants.py - one location that contains all integer and string constants defined
+    and used in all code.
+test_blackjack.py - test code for blackjack class
+test_hand.py - test code for hand class
+README
+requirements.txt
+
+
+Explanation of design choices:
+I implemented a scalable and robust version of the blackjack card game. I implemented
+a single-player version of blackjack. However, I placed all of the gameplay functions
+into a base class and inherited this base blackjack class into a blackjacksolo child
+class. My reasoning behind this was design with scalability in mind. The program is 
+structured so that adding multiplayer functionality is straightforward.
+
+I realized that all of the gameplay revolves around a user's hand and their 
+interactions affect the hand. Thus, I created a Hand class to store all data
+within a hand and hold hand-specific functions like hit and deal that operate
+on this data.
+
+One of the tricky game elements in blackjack is the user's ability to define
+whether they want an Ace to be valued at 1 or 11. This was straightforward if
+this is the 2nd card in the hand, or it is one of the cards that is dealt.
+However, a tricky edge case arises if the ace happens to be the 1st, hidden
+card in the deck. To handle this edge case, I wanted this card to be valued 
+whatever benefits the user more, as presumably this is the value they would
+choose. By default, the program handles aces as 11, and then if the final
+hand is a bust, it changes the value to a 1.
+
+A placed all of my constants and messages for the user in a constants file.
+I made this design choice for both readability and sustainability of the code.
+Reading through the functions, the user has an idea of what the values are 
+supposed to be becuase I used descriptive names. In addition, if I were to 
+change a value, it automatically updates all code written with those values,
+preventing bugs. In my development, this was useful because I initially had the
+initial deal size as 3 cards (oops) rather than 2, and this was a straightforward
+fix.
+
+To represent my deck, I use a randomly sorted list of numbers from 0 to 51, and use
+modular arithmetic to determine the value of the card and the suit, with base 13 and 4
+respectively. I used a list to allow for popping of elements when they are used in
+the deck.
+
+
+Choice of tooling:
+I selected Python to code this challenge in because its syntax is very
+readable by others to understand what is happening, and I enjoy developing
+in it. The only package required for running this code is numpy, which is
+listed in the requirements.txt. I used the unittest python unit testing
+framework for its modularity and ease of use. 
+
+
+
+I hope you enjoyed my game, thanks for playing!

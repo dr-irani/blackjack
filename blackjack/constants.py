@@ -1,10 +1,15 @@
+"""
+File that contains all constants used in all code. If any value is changed here,
+it automatically adjusts in all code.
+"""
+
 # Integers
 DECK_SIZE = 52
 INITIAL_DEAL_SIZE = 2
 FIRST_CARD = 1
 SUM = 0
 NUM_SUITS = 4
-NUM_TYPES = 13 #replace with actual name for this
+NUM_TYPES = 13
 TWO_NUM = 2
 THREE_NUM = 3
 FOUR_NUM = 4
@@ -17,7 +22,8 @@ TEN_NUM = 10
 JACK_NUM = 11
 QUEEN_NUM = 12
 KING_NUM = 0
-ACE_NUM = 1
+ACE_ONE = 1
+ACE_ELEVEN = 11
 CLUBS_NUM = 0
 SPADES_NUM = 1
 DIAMONDS_NUM = 2
@@ -46,14 +52,14 @@ DIAMONDS = "Diamonds"
 HEARTS = "Hearts"
 YES = 'y'
 NO = 'n'
-NO_FULL = 'no'
-YES_FULL = 'yes'
+NO_SPELLED_OUT = 'no'
+YES_SPELLED_OUT = 'yes'
 BUST = '\nBust!'
 BLACKJACK = "\nBLACKJACK!"
 HIT = 'h'
 PASS = 'p'
-HIT_FULL = 'hit'
-PASS_FULL = 'pass'
+HIT_SPELLED_OUT = 'hit'
+PASS_SPELLED_OUT = 'pass'
 HOW_MANY_PLAYERS_MESSAGE = "How many players would like to play? Please input \
 a number between 1 and 4.\n"
 ONE_PLAYER_LOOK_MESSAGE = "Player %d, it is your turn to be a dealt a hand. \
@@ -68,6 +74,8 @@ THANKS_FOR_PLAYING_MESSAGE = "\nThanks for playing my Black Jack game, I hope yo
 enjoyed it!"
 TOO_MANY_PLAYERS_ERROR = "This game is only supported for 1-4 players. \
 Please input a valid number."
-DISPLAY_FIRST_CARD = "Your first card is:\n"
+DISPLAY_SECOND_CARD = "\nYour first card is hidden.\nYour second card is:\n"
 INVALID_CHOICE = "Invalid choice, please answer with Y/N.\n"
 INVALID_MOVE = "Invalid move, please answer with H/P.\n"
+VALUE_OF_ACE = "Would you like to count this ace as 1 or 11?\n"
+INVALID_ACE_VAL = "Invalid choice, please answer with 1 or 11.\n"
